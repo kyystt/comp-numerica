@@ -3,10 +3,7 @@
 
 from math import sqrt
 
-def f(x, k):
-    return x ** 2 - k
-
-def secante(value, x_0, x_1, tol = 1e-9):
+def secante(f, value, x_0, x_1, tol = 1e-9):
     if (x_0 == x_1):
         x_1 += 1
 
@@ -33,10 +30,12 @@ def main():
     # k = int(input("Digite a raiz para aproximarmos: "))
     values_err = []
 
+    f = lambda x, k: x**2 - k
+
     for k in range(1, 101):
         x_n0 = k / 2.0
         x_n1 = k * 1.0
-        aprox = secante(k, x_n0, x_n1)
+        aprox = secante(f, k, x_n0, x_n1)
         print(f"Loop #{k}, aprox: {aprox}")
         values_err.append(abs(aprox - sqrt(k))/sqrt(k))
 
