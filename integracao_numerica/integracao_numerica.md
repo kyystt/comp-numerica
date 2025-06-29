@@ -85,6 +85,8 @@ $$
 \end{align*}
 $$
 
+### 3) Método $\frac{1}{3}$ de Simpson
+
 # Exercício
 Implemente o MTR
 

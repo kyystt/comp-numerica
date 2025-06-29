@@ -2,14 +2,14 @@ class Polinomio:
     def __init__(self, coefs: list[float]):
         self.coef= coefs
         self.grau: int = len(self.coef) - 1
-    
+
     def eval_pol(self, x: float) -> float:
         res: float = 0
         for i in range(self.grau+1):
             res += self.coef[len(self.coef)-i-1] * pow(x, i)
-        
+
         return res
-    
+
     def find_interval(self, a: float = -100.0, b: float = 100.0, full_res = None, tol: float = 1e-7) -> list[list[float]] | list[float]:
         if full_res is None:
             full_res = []
@@ -23,21 +23,21 @@ class Polinomio:
             mid = (a + b) / 2
             self.find_interval(a, mid, full_res, tol)
             self.find_interval(mid, b, full_res, tol)
-            
+
         return full_res
-    
+
     def bissection(self, lower_bound: float, upper_bound: float, tol: float = 1e-15, max_iter: int = 100) -> float | None:
         eval_lower = self.eval_pol(lower_bound)
         eval_upper = self.eval_pol(upper_bound)
 
         if eval_lower * eval_upper > 0:
             return None
-        
+
         for _ in range(max_iter):
             mid = (upper_bound + lower_bound) / 2
             if upper_bound - lower_bound < tol:
                 return mid
-            
+
             eval_mid = self.eval_pol(mid)
 
             if abs(eval_mid) < tol:
@@ -51,19 +51,19 @@ class Polinomio:
                 eval_lower = eval_mid
 
         return (upper_bound + lower_bound) / 2
-    
+
     def false_position(self, lower_bound: float, upper_bound: float, tol: float = 1e-15, max_iter: int = 100) -> float | None:
         eval_lower = self.eval_pol(lower_bound)
         eval_upper = self.eval_pol(upper_bound)
 
         if eval_lower * eval_upper > 0:
             return None
-        
+
         for _ in range(max_iter):
             mid = (lower_bound * eval_upper - upper_bound * eval_lower) / (eval_upper - eval_lower)
             if upper_bound - lower_bound < tol:
                 return mid
-            
+
             eval_mid = self.eval_pol(mid)
 
             if abs(eval_mid) < tol:
@@ -77,7 +77,7 @@ class Polinomio:
                 eval_lower = eval_mid
 
         return (lower_bound * eval_upper - upper_bound * eval_lower) / (eval_upper - eval_lower)
-                
+
 def main():
     n = 1
 
